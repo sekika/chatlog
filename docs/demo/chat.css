@@ -1,0 +1,196 @@
+body { background: #f5f6f8; padding-bottom: 3rem; }
+
+/* ヘッダ */
+.site-header {
+  background: #4c6ef5; /* アクセントカラー */
+  color: #fff;
+  padding: 1.2rem 0;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,.15);
+}
+.site-header .brand { font-size: 1.4rem; font-weight: bold; margin: 0; }
+.site-header .brand .hash { opacity: .6; }
+.site-header .subtitle { opacity: .8; font-size: .9rem; margin: .2rem 0 0; }
+
+/* チャンネル選択バー */
+#channel-bar {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  margin: 0 0 1.2rem;
+}
+#channel-bar { flex-wrap: wrap; }
+#channel-bar label { margin: 0; font-weight: bold; color: #555; white-space: nowrap; }
+#channel-select {
+  display: inline-block;
+  width: auto;
+  min-width: 12rem;
+  padding: .4rem .6rem;
+  border: 1px solid #ccc;
+  border-radius: .35rem;
+  background: #fff;
+  font-size: 1rem;
+}
+
+/* ナビゲーションボタン(全ログ / 日付一覧) */
+.nav-btn {
+  padding: .4rem .9rem;
+  border: 1px solid #4c6ef5;
+  border-radius: .35rem;
+  background: #fff;
+  color: #4c6ef5;
+  font-size: .95rem;
+  cursor: pointer;
+}
+.nav-btn:hover { background: #edf0fe; }
+.nav-btn.active { background: #4c6ef5; color: #fff; }
+
+/* 検索フォーム */
+#search-form {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  margin: 0;
+}
+#search-input {
+  display: inline-block;
+  width: auto;
+  min-width: 10rem;
+  padding: .4rem .6rem;
+  border: 1px solid #ccc;
+  border-radius: .35rem;
+  font-size: .95rem;
+}
+
+/* 検索結果 */
+.search-count { color: #666; font-size: .9rem; margin: 0 0 .8rem; }
+.search-result { margin-bottom: .5em; }
+.search-result .search-date {
+  display: inline-block;
+  color: #1264a3;
+  text-decoration: none;
+  padding: 0 .5rem;
+  margin-right: .3rem;
+  border: 1px solid #e3e5e8;
+  border-radius: .35rem;
+  background: #f8f8fa;
+  font-size: .85rem;
+  font-variant-numeric: tabular-nums;
+}
+.search-result .search-date:hover { background: #eef4fb; border-color: #1264a3; }
+#log mark {
+  background: #ffe58a;
+  color: inherit;
+  padding: 0 .1em;
+  border-radius: .2rem;
+}
+
+/* 日付一覧 */
+.date-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+}
+.date-list a {
+  display: inline-block;
+  padding: .5rem .9rem;
+  border: 1px solid #e3e5e8;
+  border-radius: .4rem;
+  background: #f8f8fa;
+  color: #1264a3;
+  text-decoration: none;
+  font-variant-numeric: tabular-nums;
+}
+.date-list a:hover { background: #eef4fb; border-color: #1264a3; }
+
+/* 1日分表示の前後移動バー */
+.day-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .6rem;
+  flex-wrap: wrap;
+  margin: .3rem 0 1rem;
+  padding-bottom: .6rem;
+  border-bottom: 1px solid #eee;
+}
+.day-nav + h1 { margin-top: .3rem; }
+.day-nav a {
+  color: #1264a3;
+  text-decoration: none;
+  padding: .35rem .7rem;
+  border: 1px solid #e3e5e8;
+  border-radius: .4rem;
+  background: #f8f8fa;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.day-nav a:hover { background: #eef4fb; border-color: #1264a3; }
+.day-nav .nav-list { color: #4c6ef5; }
+.day-nav .nav-disabled {
+  color: #bbb;
+  padding: .35rem .7rem;
+  white-space: nowrap;
+}
+
+/* ログ本体をカード風に */
+.log-card {
+  background: #fff;
+  border: 1px solid #e3e5e8;
+  border-radius: .6rem;
+  padding: 1.2rem 1.5rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06);
+}
+
+/* slack.js が生成する見出し */
+#log h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0 0 1rem;
+  padding-bottom: .5rem;
+  border-bottom: 2px solid #4c6ef5;
+  color: #4c6ef5;
+}
+#log h2 {
+  font-size: 1rem;
+  color: #666;
+  background: #f1f2f4;
+  border-radius: 1rem;
+  padding: .25rem .9rem;
+  display: inline-block;
+  margin: 1.6rem 0 .8rem;
+}
+
+/* メッセージ */
+.author { color: #007a5a; font-weight: bold; }
+.mention { color: #1264a3; font-weight: bold; }
+.msg {
+  margin-bottom: .35em;
+  padding: .15rem .4rem;
+  border-radius: .35rem;
+  line-height: 1.5;
+}
+.msg:hover { background: #f8f8fa; }
+.attachment { color: #666; font-size: .9rem; }
+#log a { color: #1264a3; }
+
+footer {
+  margin-top: 2rem;
+  text-align: center;
+  color: #999;
+  font-size: .85rem;
+}
+/* 取得エラーを記録している場合のフッタ表示を強調する */
+#retrieved-at.retrieve-error {
+  display: block;
+  margin-top: .4rem;
+  color: #c0392b;
+  font-weight: bold;
+}
+
+/* 公開サンプル用の最小スタイル(外部 CSS に依存しない) */
+.container { max-width: 960px; margin: 0 auto; padding: 0 1rem; }
+.text-danger { color: #c0392b; }

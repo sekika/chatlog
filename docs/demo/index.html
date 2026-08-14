@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>chatlog viewer demo</title>
+  <link href="chat.css" rel="stylesheet">
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container">
+      <p class="brand">chatlog viewer</p>
+      <p class="subtitle">Slack / Discord channel log viewer &mdash; demo</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <div id="channel-bar">
+      <label for="channel-select">チャンネル:</label>
+      <select id="channel-select" class="form-select form-control"></select>
+      <button id="show-all" type="button" class="nav-btn">全ログ</button>
+      <button id="show-dates" type="button" class="nav-btn">日付一覧</button>
+      <form id="search-form" role="search">
+        <input id="search-input" type="search" class="form-control"
+               placeholder="発言を検索" autocomplete="off">
+        <button id="search-btn" type="submit" class="nav-btn">検索</button>
+      </form>
+    </div>
+
+    <div class="log-card">
+      <div id="log"></div>
+    </div>
+
+    <footer>
+      <a href="https://sekika.github.io/chatlog/">chatlog</a> のサンプル表示（#general は Discord、#random は Slack のサンプルデータ）。
+      <span id="retrieved-at"></span>
+    </footer>
+  </div>
+
+<script src="chat.js"></script>
+<script>
+  // 表示するチャンネルを、JSON ファイルの拡張子を除いた名前で並べる。
+  // 例: general.json と random.json を置いた場合は ['general', 'random']。
+  // 先頭のチャンネルが初期表示され、以降のチャンネルは選択メニューに追加される。
+  // '#' は付けず、ファイル名と完全に一致させる（例: #雑談 → '雑談' / 雑談.json）。
+  // 分割済みのログは、<channel>.json（マニフェスト）に加えて、そこから参照される
+  // <channel>.<期間>.json も同じディレクトリに置く。本文の描画方式は各 JSON の
+  // service（slack / discord）から自動判定されるため、ここでサービスを指定する必要はない。
+  chatLog(['general', 'random']);
+</script>
+</body>
+</html>

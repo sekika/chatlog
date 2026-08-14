@@ -1,0 +1,35 @@
+title: chatlog
+description: >-
+  Slack / Discord のチャンネルログを取得して JSON に蓄積し、ブラウザで閲覧するツール。
+author:
+  name: 関 勝寿
+theme: minima
+url: "https://sekika.github.io"
+baseurl: "/chatlog"
+markdown: kramdown
+permalink: pretty
+google_analytics: G-1JRPK4WZ2B
+minima:
+  social_links:
+    - title: chatlog source repository at GitHub
+      icon: github
+      url: "https://github.com/sekika/chatlog"
+    - title: seki at PyPI
+      icon: python
+      url: "https://pypi.org/user/seki/"
+    - title: sekika at Rust crate
+      icon: rust
+      url: "https://crates.io/users/sekika"
+    - title: seki at X
+      icon: x-twitter
+      url: "https://x.com/seki"
+    - title: Google scholar
+      icon: google-scholar
+      url: "https://scholar.google.com/citations?user=Gs_ABawAAAAJ"
+    - title: ORCID
+      icon: orcid
+      url: "https://orcid.org/0000-0002-5707-0283"
+    - title: Wikipedia
+      icon: wikipedia-w
+      url: "https://ja.wikipedia.org/wiki/%E5%88%A9%E7%94%A8%E8%80%85:Katsutoshi_Seki"
+  hide_site_feed_link: true
