@@ -2,7 +2,7 @@ body { background: #f5f6f8; padding-bottom: 3rem; }
 
 /* ヘッダ */
 .site-header {
-  background: #4c6ef5; /* アクセントカラー */
+  background: #4a154b; /* アクセントカラー (Slack aubergine) */
   color: #fff;
   padding: 1.2rem 0;
   margin-bottom: 1.5rem;
@@ -35,15 +35,15 @@ body { background: #f5f6f8; padding-bottom: 3rem; }
 /* ナビゲーションボタン(全ログ / 日付一覧) */
 .nav-btn {
   padding: .4rem .9rem;
-  border: 1px solid #4c6ef5;
+  border: 1px solid #4a154b;
   border-radius: .35rem;
   background: #fff;
-  color: #4c6ef5;
+  color: #4a154b;
   font-size: .95rem;
   cursor: pointer;
 }
-.nav-btn:hover { background: #edf0fe; }
-.nav-btn.active { background: #4c6ef5; color: #fff; }
+.nav-btn:hover { background: #f3e9f4; }
+.nav-btn.active { background: #4a154b; color: #fff; }
 
 /* 検索フォーム */
 #search-form {
@@ -129,7 +129,7 @@ body { background: #f5f6f8; padding-bottom: 3rem; }
   font-variant-numeric: tabular-nums;
 }
 .day-nav a:hover { background: #eef4fb; border-color: #1264a3; }
-.day-nav .nav-list { color: #4c6ef5; }
+.day-nav .nav-list { color: #4a154b; }
 .day-nav .nav-disabled {
   color: #bbb;
   padding: .35rem .7rem;
@@ -145,14 +145,14 @@ body { background: #f5f6f8; padding-bottom: 3rem; }
   box-shadow: 0 1px 3px rgba(0,0,0,.06);
 }
 
-/* slack.js が生成する見出し */
+/* chat.js が生成する見出し */
 #log h1 {
   font-size: 1.5rem;
   font-weight: bold;
   margin: 0 0 1rem;
   padding-bottom: .5rem;
-  border-bottom: 2px solid #4c6ef5;
-  color: #4c6ef5;
+  border-bottom: 2px solid #4a154b;
+  color: #4a154b;
 }
 #log h2 {
   font-size: 1rem;
