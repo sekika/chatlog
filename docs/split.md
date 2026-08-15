@@ -15,7 +15,7 @@ python3 convert/merge.py <JSONファイル> [--keep-chunks]
 | コマンド | 説明 |
 | --- | --- |
 | `split.py` | 単一形式のファイルを、マニフェスト＋期間チャンクに分割する |
-| `split.py --by year\|month` | 分割の粒度（既定は年単位）。期間は JST で決める |
+| `split.py --by <粒度>` | 粒度は year または month（既定は年単位）。期間は JST で決める |
 | `split.py --force` | 既に分割済みでも、粒度を変えて分割し直す |
 | `merge.py` | 分割した JSON を 1 ファイルに統合して元に戻す |
 | `merge.py --keep-chunks` | 統合してもチャンクファイルを消さずに残す |
