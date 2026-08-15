@@ -9,6 +9,11 @@ baseurl: "/chatlog"
 markdown: kramdown
 permalink: pretty
 google_analytics: G-1JRPK4WZ2B
+header_pages:
+  - collect.md
+  - split.md
+  - viewer.md
+  - json.md
 minima:
   social_links:
     - title: chatlog source repository at GitHub
