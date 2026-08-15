@@ -3,7 +3,7 @@ description: >-
   Slack / Discord のチャンネルログを取得して JSON に蓄積し、ブラウザで閲覧するツール。
 author:
   name: 関 勝寿
-theme: minima
+remote_theme: jekyll/minima
 url: "https://sekika.github.io"
 baseurl: "/chatlog"
 markdown: kramdown
