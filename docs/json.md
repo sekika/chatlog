@@ -37,13 +37,11 @@ title: JSON形式
 | `messages[].files` | 添付ファイルの表示名一覧（添付がある場合のみ） |
 | `error` | 取得エラーが起きた場合のみ記録（`{"message": …, "at": …}`） |
 
-重複判定のキーはサービスで異なります（Slack は `ts`、Discord は `id`）。分割保存の突合も
-`id` があれば `id`、無ければ `ts` を使います。
+重複判定のキーはサービスで異なります（Slack は `ts`、Discord は `id`）。分割保存の突合も `id` があれば `id`、無ければ `ts` を使います。
 
 ## 分割形式
 
-[分割]({{ '/split/' | relative_url }})すると、エントリファイル（例 `general.json`）は **マニフェスト** になり、本体は期間ごとの
-**チャンク**（例 `general.2024.json`）に分かれます。
+[分割]({{ '/split/' | relative_url }})すると、エントリファイル（例 `general.json`）は**マニフェスト**になり、本体は期間ごとの**チャンク**（例 `general.2024.json`）に分かれます。
 
 ```json
 {
@@ -61,5 +59,4 @@ title: JSON形式
 }
 ```
 
-チャンクは `{ "messages": [ … ] }` の形。`users` や `service` はマニフェスト側に持ちます。
-`convert/merge.py` で単一形式に戻せます。
+チャンクは `{ "messages": [ … ] }` の形。`users` や `service` はマニフェスト側に持ちます。`convert/merge.py` で単一形式に戻せます。

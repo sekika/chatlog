@@ -3,8 +3,7 @@ layout: page
 title: chatlog
 ---
 
-**Slack / Discord のチャンネルログを取得して JSON に蓄積し、ブラウザで閲覧するツール。**
-差分取得で少しずつ追記していき、ログが大きくなったらファイルの分割・統合もできます。
+**Slack / Discord のチャンネルログを取得して JSON に蓄積し、ブラウザで閲覧するツール。**差分取得で少しずつ追記していき、ログが大きくなったらファイルの分割・統合もできます。
 
 - ソース: [github.com/sekika/chatlog](https://github.com/sekika/chatlog)
 - **ライブデモ: [デモを開く]({{ '/demo/' | relative_url }})**（`#general` は Discord、`#random` は Slack のサンプルデータ）
@@ -33,9 +32,7 @@ title: chatlog
 
 - Python 3 系
 - Slack を取得する場合: Slack API トークン。追加ライブラリは不要。
-- Discord を取得する場合: Discord Bot トークンと `discord` ライブラリ
-  （`python3 -m pip install discord`）。`discord` は Discord 取得時にのみ読み込むので、
-  Slack だけ使うなら未インストールで構いません。
+- Discord を取得する場合: Discord Bot トークンと `discord` ライブラリ（`python3 -m pip install discord`）。`discord` は Discord 取得時にのみ読み込むので、Slack だけ使うなら未インストールで構いません。
 
 ## インストール
 
