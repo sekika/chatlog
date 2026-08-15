@@ -1,6 +1,67 @@
 <style>
-  /* メニュー項目の間に少し余白を入れる */
+  /* デスクトップではメニュー項目の間に少し余白を入れる */
   .site-nav .page-link:not(:last-child) { margin-right: 1.4em; }
+
+  /*
+   * Minima のバージョンによらず、狭い画面ではメニューを読みやすい
+   * ドロップダウンにする。リンクが横に折り返されるのを防ぐ。
+   */
+  @media screen and (max-width: 600px) {
+    .site-header .wrapper {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      min-height: 54px;
+      padding-right: 15px;
+    }
+
+    .site-title {
+      box-sizing: border-box;
+      float: none;
+      max-width: calc(100% - 60px);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .site-nav {
+      float: none;
+      height: auto;
+      margin-left: auto;
+      min-height: 0;
+      position: static;
+    }
+
+    /* メニューを開いたらヘッダー内で1行を使い、本文を押し下げる。 */
+    .site-nav:has(.nav-trigger:checked) {
+      width: 100%;
+    }
+
+    .site-nav:has(.nav-trigger:checked) label {
+      float: right;
+    }
+
+    .site-nav input:checked ~ .trigger {
+      box-sizing: border-box;
+      clear: both;
+      display: block !important;
+      height: auto !important;
+      line-height: normal;
+      min-height: 0 !important;
+      width: 100%;
+      padding: 0;
+    }
+
+    .site-nav .page-link,
+    .site-nav .page-link:not(:last-child) {
+      display: block;
+      line-height: 1.5 !important;
+      margin: 0;
+      padding: 9px 16px;
+      text-align: left;
+      white-space: nowrap;
+    }
+  }
 </style>
 <header class="site-header" role="banner">
 
