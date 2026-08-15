@@ -79,6 +79,31 @@ JSON に保存される `time` は UTC ですがビューアは使わず、`ts`�
 `service` はチャンネル単位（JSON 単位）なので、Slack と Discord のチャンネルを 1 つのビューアに
 混在させても、各 JSON の `service` に従って描画されます。
 
+## そのほかの編集箇所
+
+`index.html` は末尾の `chatLog(...)` を書き換えるのが最低限の作業ですが、見出しや説明文も
+公開先に合わせて自由に編集できます。次の箇所はテキストを差し替えても動作に影響しません。
+
+- **`<title>`**（`<head>` 内）: ブラウザのタブや履歴に表示される名前。
+- **ヘッダ**（`<header class="site-header">`）: サイト名の `<p class="brand">` と
+  副題の `<p class="subtitle">`。組織名や対象チャンネルの説明に置き換えます。不要なら
+  `<header>` ごと削除しても構いません。
+- **フッタ**（`<footer>`）: 説明文（デモではサンプルデータの注記）を自由に書き換えられます。
+  ただし末尾の `<span id="retrieved-at"></span>` は[取得状況](#取得状況の表示)を
+  ビューアが自動で埋め込む場所なので、残しておいてください。
+- **見た目**: 色やフォントなどの調整は `chat.css` を編集します。
+
+一方、次の要素は `chat.js` / `chat.css` が名前で参照しているため、**id や class、要素そのものは
+変更・削除しないでください**（表示ラベルの文言だけなら変更可）。
+
+- `<select id="channel-select">`（チャンネル選択）とラベル
+- `<button id="show-all">` `<button id="show-dates">`（全ログ・日付一覧）
+- `<form id="search-form">` と `<input id="search-input">` `<button id="search-btn">`（検索）
+- `<div id="log">`（ログ本文の描画先）と、それを囲む `<div class="log-card">`
+- `<span id="retrieved-at">`（取得状況の表示先）
+
+`<script src="chat.js">` と、その下の `chatLog(...)` を呼ぶ `<script>` も必須です。
+
 ## 取得状況の表示
 
 画面下部のフッタには、その JSON の取得状況が表示されます。
