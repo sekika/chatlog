@@ -41,6 +41,11 @@
       float: right;
     }
 
+    /* 閉じているときはリンクを隠し、ボタン操作時だけ表示する。 */
+    .site-nav .trigger {
+      display: none;
+    }
+
     .site-nav input:checked ~ .trigger {
       box-sizing: border-box;
       clear: both;
