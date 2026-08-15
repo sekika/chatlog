@@ -522,7 +522,7 @@ function showRetrievedAt(store) {
     el.textContent = 'Error retrieving at ' + at + ': ' + (store.error.message || '');
     el.classList.add('retrieve-error');
   } else if (store && store.retrievedAt) {
-    el.textContent = 'Data retrieved at ' + jstDateTime(new Date(store.retrievedAt));
+    el.innerHTML = 'Data retrieved at ' + jstDateTime(new Date(store.retrievedAt)) + ' by <a href="https://sekika.github.io/chatlog/">chatlog</a>';
   }
 }
 
