@@ -3,7 +3,7 @@ layout: page
 title: 取得
 ---
 
-`chatlog.py` で Slack / Discord のチャンネルログを取得し、JSON に蓄積します。まだの場合は[トップページ]({{ '/' | relative_url }})の手順で `git clone` してください。
+`chatlog.py` で Slack / Discord のチャンネルログを取得し、JSON に蓄積します。まだソースコードを取得していない場合は[トップページ]({{ '/' | relative_url }})の手順で `git clone` してください。
 
 ## 動作環境
 
