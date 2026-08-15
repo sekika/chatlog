@@ -66,7 +66,7 @@ Discord の例:
 | キー | 説明 |
 | --- | --- |
 | `service` | 取得元。`"slack"` または `"discord"`。**必須** |
-| `token` | API トークン（Slack は Bot トークン `xoxb-` 推奨、Discord は Bot トークン） |
+| `token` | API トークン（Slack は Bot トークン `xoxb-` 推奨、Discord は Bot トークン）。**必須** |
 | `overlap_seconds` | 取りこぼし対策のマージン（秒）。保存済みの最新メッセージからこの秒数だけさかのぼって取得し直す。**省略可**（既定 `86400` = 1 日） |
 
 ## Slack の準備

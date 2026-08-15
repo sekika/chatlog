@@ -31,7 +31,7 @@ title: JSON形式
 | `messages` | メッセージの配列（`ts` の昇順） |
 | `messages[].id` | **Discord のみ**。メッセージ ID（一意。Discord の重複判定のキー） |
 | `messages[].ts` | タイムスタンプ（エポック秒。ビューアが日付・時刻表示に使う。Slack の重複判定のキー） |
-| `messages[].time` | `ts` を整形した日時（UTC, `YYYY-MM-DD HH:MM:SS`） |
+| `messages[].time` | `ts` を整形した日時（**UTC**, `YYYY-MM-DD HH:MM:SS`）。人が読むための補助項目で、ビューアは使わない（ビューアは `ts` から JST を計算して表示する） |
 | `messages[].name` | 発言者名 |
 | `messages[].text` | 本文（Slack は実体参照済み・`<@ID>`／`<url\|text>`、Discord は生テキスト・`<@ID>`／`<@!ID>`） |
 | `messages[].files` | 添付ファイルの表示名一覧（添付がある場合のみ） |
