@@ -28,7 +28,7 @@ Slack / Discord のどちらを取得するかは、設定ファイルの `servi
 実行例:
 
 ```
-python3 chatlog.py general.json general config.json
+python3 chatlog.py general.json general ~/.config/chatlog/config.json
 ```
 
 `general` チャンネルの新規メッセージ（前回保存分より後）を取得して `general.json` に追記します。出力ファイルが無ければチャンネルの最古から全件取得します。チャンネル名とファイル名は独立しているので、日本語チャンネル名を英語ファイル名に振り分けてもかまいません。
