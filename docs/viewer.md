@@ -100,3 +100,7 @@ python3 -m http.server
 - `<span id="retrieved-at">`（取得状況の表示先）
 
 `<script src="chat.js">` と、その下の `chatLog(...)` を呼ぶ `<script>` も必須です。
+
+### アクセス制限が必要な場合
+
+このビューアは認証機能を持たないため、URL を知っていれば誰でも閲覧できます。閲覧者を限定したい場合は、配置先の Web サーバー側で BASIC 認証や Digest 認証などを設定してください。
