@@ -262,12 +262,15 @@ async def _discord_fetch(client, store, channel_name, overlap_seconds):
     # 添付ファイルはファイル名だけを記録する(本体は取得しない)。
     files = [a.filename for a in msg.attachments]
 
+    # ピン留め等のシステムメッセージは content が空で、表示文言は種別から生成される。
+    # system_content は通常メッセージなら content を、システムメッセージなら
+    # 生成済みの文言(英語)を返すので、これを使えば両方を取りこぼさない。
     entry = {
       'id': mid,
       'ts': "%.6f" % msg.created_at.timestamp(),
       'time': dt.strftime("%Y-%m-%d %H:%M:%S"),
       'name': name,
-      'text': msg.content,
+      'text': msg.system_content,
     }
     if files:
       entry['files'] = files
