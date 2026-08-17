@@ -64,6 +64,71 @@
           ]
         }
       ]
+    },
+    {
+      "ts": "1775034000.000100",
+      "time": "2026-04-01 09:00:00",
+      "name": "alice",
+      "text": "リリース手順のメモです。\n1. ブランチを作成\n2. テストを実行\n3. タグを付けて公開\nサンプルコード:\nnpm run build\n詳しくは 手順書 を参照。",
+      "blocks": [
+        {
+          "type": "rich_text",
+          "elements": [
+            {
+              "type": "rich_text_section",
+              "elements": [
+                { "type": "text", "text": "リリース手順のメモです。", "style": { "bold": true } }
+              ]
+            },
+            {
+              "type": "rich_text_list",
+              "style": "ordered",
+              "indent": 0,
+              "elements": [
+                { "type": "rich_text_section", "elements": [ { "type": "text", "text": "ブランチを作成" } ] },
+                { "type": "rich_text_section", "elements": [ { "type": "text", "text": "テストを実行" } ] },
+                { "type": "rich_text_section", "elements": [ { "type": "text", "text": "タグを付けて公開" } ] }
+              ]
+            },
+            {
+              "type": "rich_text_section",
+              "elements": [ { "type": "text", "text": "サンプルコード:" } ]
+            },
+            {
+              "type": "rich_text_preformatted",
+              "elements": [ { "type": "text", "text": "npm run build" } ]
+            },
+            {
+              "type": "rich_text_section",
+              "elements": [ { "type": "text", "text": "詳しくは " }, { "type": "link", "url": "https://example.com/release", "text": "手順書" }, { "type": "text", "text": " を参照。" } ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ts": "1775034600.000100",
+      "time": "2026-04-01 09:10:00",
+      "name": "bob",
+      "text": ":tada: リリースありがとうございます！ @here 対応感謝です。 重要 な変更点は共有済みです。",
+      "blocks": [
+        {
+          "type": "rich_text",
+          "elements": [
+            {
+              "type": "rich_text_section",
+              "elements": [
+                { "type": "emoji", "name": "tada", "unicode": "1f389" },
+                { "type": "text", "text": " リリースありがとうございます！ " },
+                { "type": "broadcast", "range": "here" },
+                { "type": "text", "text": " 対応感謝です。 " },
+                { "type": "text", "text": "重要", "style": { "bold": true } },
+                { "type": "text", "text": " な変更点は共有済みです。" }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }
