@@ -30,12 +30,6 @@ title: chatlog
 3. **[ビューア]({{ '/viewer/' | relative_url }})** — 蓄積した JSON をブラウザで閲覧する。
 4. **[JSON の形式]({{ '/json/' | relative_url }})** — 蓄積されるデータ構造のリファレンス。
 
-## 動作環境
-
-- Python 3 系
-- Slack を取得する場合: Slack API トークン。追加ライブラリは不要。
-- Discord を取得する場合: Discord Bot トークンと `discord` ライブラリ（`python3 -m pip install discord`）。`discord` は Discord 取得時にのみ読み込むので、Slack だけ使うなら未インストールで構いません。
-
 ## インストール
 
 ```
