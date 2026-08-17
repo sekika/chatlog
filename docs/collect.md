@@ -69,7 +69,7 @@ Slack の Web API（`conversations.*`）を使います。
 
 1. [Slack API: Your Apps](https://api.slack.com/apps) で **Create New App → From scratch**。
 2. **OAuth & Permissions** の **Bot Token Scopes** に次を追加: `channels:read` / `channels:history` / `groups:read` / `groups:history` / `users:read`（パブリックチャンネルのみなら `groups:*` は不要）。
-3. **Install to Workspace** して **Bot User OAuth Token**（`xoxb-`）を取得し、`token` に設定。
+3. **Install to Workspace** して **Bot User OAuth Token**（`xoxb-`）を取得し、`token` に設定。このトークンはインストールしたワークスペース専用で、取得対象もそのワークスペースのチャンネルに限られます。
 4. 取得したいチャンネルに Bot を招待する（`/invite @アプリ名`）。Bot がメンバーでないと履歴を取得できません。
 
 チャンネル名は Slack 上の名前と完全一致で指定します。コマンド引数には先頭の `#` を付けません（例: `#general` は `general`）。アーカイブ済みチャンネルは取得対象外です。
