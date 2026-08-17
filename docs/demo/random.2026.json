@@ -17,6 +17,53 @@
       "time": "2026-03-01 00:10:00",
       "name": "bob",
       "text": "賛成です。おすすめの場所を調べておきます。"
+    },
+    {
+      "ts": "1772324400.000100",
+      "time": "2026-03-01 00:20:00",
+      "name": "alice",
+      "text": "書式付きメッセージの例です。 太字・斜体・取り消し線・コード を表示できます。\n• 箇条書きの項目\n• リンク付き: 資料\n> 引用ブロックの例。\nprint('hello')\n<@U01ALICE> 確認お願いします。",
+      "blocks": [
+        {
+          "type": "rich_text",
+          "elements": [
+            {
+              "type": "rich_text_section",
+              "elements": [
+                { "type": "text", "text": "書式付きメッセージの例です。", "style": { "bold": true } },
+                { "type": "text", "text": " 太字・" },
+                { "type": "text", "text": "斜体", "style": { "italic": true } },
+                { "type": "text", "text": "・" },
+                { "type": "text", "text": "取り消し線", "style": { "strike": true } },
+                { "type": "text", "text": "・" },
+                { "type": "text", "text": "コード", "style": { "code": true } },
+                { "type": "text", "text": " を表示できます。" }
+              ]
+            },
+            {
+              "type": "rich_text_list",
+              "style": "bullet",
+              "indent": 0,
+              "elements": [
+                { "type": "rich_text_section", "elements": [ { "type": "text", "text": "箇条書きの項目" } ] },
+                { "type": "rich_text_section", "elements": [ { "type": "text", "text": "リンク付き: " }, { "type": "link", "url": "https://example.com/doc", "text": "資料" } ] }
+              ]
+            },
+            {
+              "type": "rich_text_quote",
+              "elements": [ { "type": "text", "text": "引用ブロックの例。" } ]
+            },
+            {
+              "type": "rich_text_preformatted",
+              "elements": [ { "type": "text", "text": "print('hello')" } ]
+            },
+            {
+              "type": "rich_text_section",
+              "elements": [ { "type": "user", "user_id": "U01ALICE" }, { "type": "text", "text": " 確認お願いします。" } ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }

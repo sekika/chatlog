@@ -158,6 +158,7 @@ def fetch_slack(store, token, channel_name, overlap_seconds):
     seen_ts.add(ts)
 
     dt = datetime.fromtimestamp(float(ts), UTC)
+    rich_blocks = None
     if 'user' in msg:
       user = find_user(token, msg['user'], channel_users_list)
       if not isinstance(user, type(None)):
@@ -165,6 +166,9 @@ def fetch_slack(store, token, channel_name, overlap_seconds):
       else: # 既に存在しないユーザの場合
         name = msg['user']
       text = msg.get('text', '')
+      # 書式付き(太字・リスト・コード等)のメッセージだけ rich_text ブロックを保存する。
+      # プレーンテキストやメンション・リンクだけの投稿は text で再現できるので保存しない。
+      rich_blocks = slack_formatted_blocks(msg)
     elif 'attachments' in msg:
       # プラグインが投げてるjsonフォーマットはプラグインごとに違うので、とりあえず中身全部つっこむ
       name = "PLUGIN"
@@ -184,6 +188,10 @@ def fetch_slack(store, token, channel_name, overlap_seconds):
       'name': name,
       'text': text,
     }
+    # 書式付きメッセージのみ rich_text ブロックを持たせる。ビューアは blocks があれば
+    # それを描画し、無ければ text にフォールバックする。text は検索用にも常に残す。
+    if rich_blocks:
+      entry['blocks'] = rich_blocks
     if files:
       entry['files'] = files
     store['messages'].append(entry)
@@ -192,6 +200,28 @@ def fetch_slack(store, token, channel_name, overlap_seconds):
     store.setdefault('_added_entries', []).append(entry)
     added += 1
   return added
+
+# Slack メッセージの rich_text ブロックを返す。ただし書式(太字/斜体/取り消し線/
+# コード/リスト/引用/コードブロック)を含むものだけ。プレーンな本文や、メンション・
+# リンクしか含まないものは text で再現できるので None を返し、保存しない。
+def slack_formatted_blocks(msg):
+  blocks = [b for b in msg.get('blocks', []) if b.get('type') == 'rich_text']
+  if not blocks:
+    return None
+  return blocks if _rich_text_has_formatting(blocks) else None
+
+# rich_text ブロック配列に「text では再現できない書式」が含まれるか判定する。
+# ・rich_text_section 以外のコンテナ(list/quote/preformatted)があれば書式あり。
+# ・section 内に style(bold/italic/strike/code)付きのテキストがあれば書式あり。
+def _rich_text_has_formatting(blocks):
+  for b in blocks:
+    for el in b.get('elements', []):
+      if el.get('type') != 'rich_text_section':
+        return True
+      for leaf in el.get('elements', []):
+        if leaf.get('style'):
+          return True
+  return False
 
 # Discord からチャンネル履歴を取得し、store に差分を追記して追加件数を返す。
 # 重複排除は Discord のメッセージ ID(スノーフレーク、一意)で行う。

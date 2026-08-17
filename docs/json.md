@@ -34,6 +34,7 @@ title: JSON形式
 | `messages[].time` | `ts` を整形した日時（**UTC**, `YYYY-MM-DD HH:MM:SS`）。人が読むための補助項目で、ビューアは使わない（ビューアは `ts` から JST を計算して表示する） |
 | `messages[].name` | 発言者名 |
 | `messages[].text` | 本文（Slack は実体参照済み・`<@ID>`／`<url\|text>`、Discord は生テキスト・`<@ID>`／`<@!ID>`） |
+| `messages[].blocks` | **Slack のみ・書式付きメッセージのみ**。Slack の `rich_text` ブロック（太字・斜体・取り消し線・コード・リスト・引用・コードブロック）。ビューアは `blocks` があればこれを描画し、無ければ `text` を使う。プレーンな本文やメンション・リンクだけの投稿には付かない（`text` で再現できるため） |
 | `messages[].files` | 添付ファイルの表示名一覧（添付がある場合のみ） |
 | `error` | 取得エラーが起きた場合のみ記録（`{"message": …, "at": …}`） |
 

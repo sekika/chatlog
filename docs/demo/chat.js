@@ -121,6 +121,96 @@ function convertLine(line, users, service) {
   return s;
 }
 
+// ===== Slack rich_text ブロックの描画 =====
+// chatlog.py は書式付き(太字・リスト・コード等)の Slack メッセージにだけ
+// msg.blocks(rich_text 構造)を付与する。blocks があればここで HTML 化し、無ければ
+// 従来どおり msg.text を convertLine で描画する(下の renderChannel / renderSearch)。
+
+// テキスト要素の中身を HTML にする。改行は <br /> に、その他は完全にエスケープする。
+function richText(s) {
+  return escapeHtml(s).replace(/\n/g, '<br />\n');
+}
+
+// インライン要素(text / link / user / broadcast / emoji / …)1 つを HTML にする。
+// users はユーザ ID→名前のマップ(メンション解決用)。
+function renderRichInline(el, users) {
+  users = users || {};
+  switch (el.type) {
+    case 'text': {
+      let h = richText(el.text || '');
+      const st = el.style || {};
+      if (st.code) h = '<code>' + h + '</code>';
+      if (st.bold) h = '<strong>' + h + '</strong>';
+      if (st.italic) h = '<em>' + h + '</em>';
+      if (st.strike) h = '<s>' + h + '</s>';
+      return h;
+    }
+    case 'link': {
+      const url = el.url || '';
+      const text = (el.text && el.text.length) ? el.text : url;
+      return '<a href="' + escapeAttr(url) + '">' + richText(text) + '</a>';
+    }
+    case 'user':
+      // 解決できないIDは ID をそのまま(退会者など)
+      return '<span class="mention">@' + escapeHtml(users[el.user_id] || el.user_id) + '</span>';
+    case 'broadcast':
+      // @here / @channel / @everyone
+      return '<span class="mention">@' + escapeHtml(el.range || 'channel') + '</span>';
+    case 'emoji':
+      // unicode(コードポイント)があれば実際の絵文字を、無ければ :name: を表示
+      if (el.unicode) {
+        try {
+          return el.unicode.split('-').map(function (c) {
+            return String.fromCodePoint(parseInt(c, 16));
+          }).join('');
+        } catch (e) { /* フォールバックへ */ }
+      }
+      return escapeHtml(':' + (el.name || '') + ':');
+    default:
+      // 未知の要素は text があれば出す(無ければ無視)
+      return el.text ? richText(el.text) : '';
+  }
+}
+
+// コンテナ内のインライン要素をまとめて描画する。
+function renderRichInlines(elements, users) {
+  return (elements || []).map(function (el) { return renderRichInline(el, users); }).join('');
+}
+
+// rich_text ブロック配列を HTML にする。
+function renderRichText(blocks, users) {
+  let html = '';
+  (blocks || []).forEach(function (block) {
+    (block.elements || []).forEach(function (el) {
+      switch (el.type) {
+        case 'rich_text_section':
+          html += '<div>' + renderRichInlines(el.elements, users) + '</div>\n';
+          break;
+        case 'rich_text_list': {
+          const tag = el.style === 'ordered' ? 'ol' : 'ul';
+          let items = '';
+          (el.elements || []).forEach(function (item) {
+            items += '<li>' + renderRichInlines(item.elements, users) + '</li>\n';
+          });
+          // 入れ子(indent)は別の rich_text_list として来るので、字下げで表現する
+          const indent = el.indent ? ' style="margin-left:' + (el.indent * 1.5) + 'em"' : '';
+          html += '<' + tag + ' class="rt-list"' + indent + '>\n' + items + '</' + tag + '>\n';
+          break;
+        }
+        case 'rich_text_quote':
+          html += '<blockquote>' + renderRichInlines(el.elements, users) + '</blockquote>\n';
+          break;
+        case 'rich_text_preformatted':
+          html += '<pre><code>' + renderRichInlines(el.elements, users) + '</code></pre>\n';
+          break;
+        default:
+          break;
+      }
+    });
+  });
+  return html;
+}
+
 // store から出現する日付(JST の YYYY/MM/DD)を古い順の配列で返す
 function collectDates(store) {
   const seen = {};
@@ -161,10 +251,15 @@ function renderChannel(store, channel, dateFilter) {
       block += renderAuthor(author);
     }
 
-    // 本文(改行を含む場合は行ごとに処理)
-    const lines = String(msg.text).split('\n');
-    for (const line of lines) {
-      block += convertLine(line, users, service) + '<br />\n';
+    // 本文。書式付き Slack メッセージ(blocks あり)は rich_text を描画し、
+    // それ以外は text を行ごとに convertLine で描画する。
+    if (service === 'slack' && Array.isArray(msg.blocks) && msg.blocks.length) {
+      block += renderRichText(msg.blocks, users);
+    } else {
+      const lines = String(msg.text).split('\n');
+      for (const line of lines) {
+        block += convertLine(line, users, service) + '<br />\n';
+      }
     }
     // 添付ファイルがあった場合はファイル名を表示する(本体は取得していない)
     if (Array.isArray(msg.files) && msg.files.length) {
@@ -226,9 +321,14 @@ function renderSearch(store, channel, query) {
     block += '<a href="#" class="date-link search-date" data-date="' +
       escapeAttr(date) + '">' + escapeHtml(date) + '</a> ';
     block += renderAuthor(msg.name);
-    const lines = String(msg.text).split('\n');
-    for (const line of lines) {
-      block += highlightHtml(convertLine(line, users, service), q) + '<br />\n';
+    // 検索対象は text だが、表示は本編と同じく blocks があれば rich_text を使う。
+    if (service === 'slack' && Array.isArray(msg.blocks) && msg.blocks.length) {
+      block += highlightHtml(renderRichText(msg.blocks, users), q);
+    } else {
+      const lines = String(msg.text).split('\n');
+      for (const line of lines) {
+        block += highlightHtml(convertLine(line, users, service), q) + '<br />\n';
+      }
     }
     if (Array.isArray(msg.files) && msg.files.length) {
       block += '<div class="attachment">📎 ' +
