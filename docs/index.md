@@ -6,6 +6,7 @@ title: chatlog
 **Slack / Discord のチャンネルログを取得して JSON に蓄積し、ブラウザで閲覧するツール。**差分取得で少しずつ追記していき、ログが大きくなったらファイルの分割・統合もできます。
 
 - ソース: [github.com/sekika/chatlog](https://github.com/sekika/chatlog)
+- フィードバック・バグ報告: [GitHub Issues](https://github.com/sekika/chatlog/issues)
 - 修正履歴: [`chatlog.py`](https://github.com/sekika/chatlog/commits/main/chatlog.py) ／ [ビューア（`docs/demo`）](https://github.com/sekika/chatlog/commits/main/docs/demo)
 - **ライブデモ: [デモを開く]({{ '/demo/' | relative_url }})**（`#general` は Discord、`#random` は Slack のサンプルデータ）
 
