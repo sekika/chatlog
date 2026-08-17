@@ -1,7 +1,7 @@
 {
   "channel": "general",
   "service": "discord",
-  "retrievedAt": "2024-02-02T05:10:00+00:00",
+  "retrievedAt": "2024-07-02T05:10:00+00:00",
   "users": {
     "1001": "alice",
     "1002": "bob",
